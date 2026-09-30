@@ -154,6 +154,7 @@ details.faq .a{padding:0 20px 18px;color:var(--muted);font-size:.95rem}
 .hero-sub h1{font-size:2.2rem;max-width:760px}
 .hero-sub .sub{max-width:700px;color:#d9d0ee}
 .hero-action{margin-top:20px}
+.promo-note{color:#d9d0ee;font:500 .82rem/1.5 'Segoe UI',Arial,sans-serif;margin-top:12px}
 
 /* footer */
 footer.site{border-top:1px solid var(--border);background:var(--bg2);padding:44px 0 34px;margin-top:40px}
