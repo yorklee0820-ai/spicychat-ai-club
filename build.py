@@ -10,6 +10,16 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).parent
 SITE = "https://spicychat-ai.club"
+GOOGLE_VERIFICATION = "AeKEHH6iEmkBP6dM4qb5Utq2Jvvng24tKWWkh2YenZo"
+GA4_ID = "G-9EQR9R0YQF"
+GOOGLE_TAG = f'''<script async src="https://www.googletagmanager.com/gtag/js?id={GA4_ID}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){{dataLayer.push(arguments);}}
+    gtag('js', new Date());
+
+    gtag('config', '{GA4_ID}');
+  </script>'''
 OFFICIAL = "https://spicychat.ai/"
 PLAYBOX = "https://www.playbox.com/?ref=eushing"
 DESTINATION = os.environ.get("SPICYCHAT_DESTINATION", PLAYBOX)
@@ -100,6 +110,7 @@ def page(slug, title, description, heading, image, body):
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="rating" content="adult">
+  <meta name="google-site-verification" content="{GOOGLE_VERIFICATION}">
   <meta name="theme-color" content="#0b0714">
   <meta name="description" content="{html.escape(description, quote=True)}">
   <link rel="canonical" href="{url}">
@@ -111,6 +122,7 @@ def page(slug, title, description, heading, image, body):
   <meta name="twitter:card" content="summary_large_image">
   <title>{html.escape(title)}</title>
   <link rel="stylesheet" href="style.css">
+  {GOOGLE_TAG}
   <script type="application/ld+json">{schema}</script>
 </head>
 <body>
@@ -163,7 +175,7 @@ CONTENT["sitemap"] = '<section><div class="wrap narrow"><p class="lede">All page
 for slug, title, description, heading, image in PAGES:
     (ROOT / f"{slug}.html").write_text(page(slug, title, description, heading, image, CONTENT[slug]), encoding="utf-8")
 
-(ROOT / "404.html").write_text('''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Page not found | SpicyChat AI Club</title><link rel="stylesheet" href="/style.css"></head><body><main class="wrap error-page"><p class="eyebrow">404</p><h1>Page not found</h1><p>That page may have moved.</p><a class="btn btn-primary" href="/">Return home</a></main></body></html>''', encoding="utf-8")
+(ROOT / "404.html").write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Page not found | SpicyChat AI Club</title><link rel="stylesheet" href="/style.css">{GOOGLE_TAG}</head><body><main class="wrap error-page"><p class="eyebrow">404</p><h1>Page not found</h1><p>That page may have moved.</p><a class="btn btn-primary" href="/">Return home</a></main></body></html>''', encoding="utf-8")
 (ROOT / "robots.txt").write_text("User-agent: *\nAllow: /\nDisallow: /404.html\nSitemap: " + SITE + "/sitemap.xml\n", encoding="utf-8")
 (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>{SITE + ("/" if slug == "index" else "/" + slug + ".html")}</loc></url>\n' for slug, *_ in PAGES) + '</urlset>\n', encoding="utf-8")
 DIST = ROOT / "dist"

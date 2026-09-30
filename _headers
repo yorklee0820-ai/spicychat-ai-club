@@ -3,7 +3,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-jHYU66zQjYe70CvjKP/AXK1YotN/Knhvn30MkRxxzXk='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com 'sha256-4eS57XaYNqe+K46kpl6S0JoZ8I4+R52/WbHE7nP98Wo=' 'sha256-jHYU66zQjYe70CvjKP/AXK1YotN/Knhvn30MkRxxzXk='; style-src 'self'; img-src 'self' data: https://*.google-analytics.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
 
 /assets/img/*
   Cache-Control: public, max-age=604800
